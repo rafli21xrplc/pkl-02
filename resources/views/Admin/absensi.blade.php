@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="mt-8">
-        <div class="mb-3">
+        <div class="mb-3 flex justify-between">
             <h3 class="text-xl font-bold text-gray-900 mb-2">Absensi Mahasiswa</h3>
         </div>
         <div class="overflow-hidden rounded-lg border border-gray-200 shadow-lg">

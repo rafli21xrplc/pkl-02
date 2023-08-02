@@ -11,13 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('matkuls', function (Blueprint $table) {
-            $table->id('id');
-            $table->string('code')->unique();
-            $table->string('name');
-            $table->rememberToken();
-            $table->timestamps();
-        }); 
+        Schema::table('users', function (Blueprint $table) {
+            $table->boolean('is_active')->default(1);
+        });
     }
 
     /**
@@ -25,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('matkuls');
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('is_active');
+        });
     }
 };

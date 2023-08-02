@@ -6,11 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @vite('resources/css/app.css')
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>{{ $title }}</title>
 </head>
 
 <body>
-    <!-- This is an example component -->
+
     <div>
         <nav class="bg-white border-b border-gray-200 fixed z-30 w-full">
             <div class="px-3 py-3 lg:px-5 lg:pl-3">
@@ -31,7 +34,7 @@
                                     clip-rule="evenodd"></path>
                             </svg>
                         </button>
-                        <a href="#" class="text-xl font-bold flex items-center lg:ml-2.5">
+                        <a href="/admin/dashboard" class="text-xl font-bold flex items-center lg:ml-2.5">
                             <img src="https://demo.themesberg.com/windster/images/logo.svg" class="h-6 mr-2"
                                 alt="Windster Logo">
                             <span class="self-center whitespace-nowrap">Dashboard</span>
@@ -53,9 +56,18 @@
                             </div>
                         </form> --}}
                     </div>
-                    <div class="flex items-center">
+                    <div class="flex items-center flex-row-reverse mx-2">
+                        <div>
+                            <a href="/signOut">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="1em"
+                                    viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                                    <path
+                                        d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z" />
+                                </svg>
+                            </a>
+                        </div>
                         <a href="#"
-                            class="hidden sm:inline-flex ml-5 font-medium rounded-lg text-sm px-5 py-2.5 text-center items-center mr-3">
+                            class="hidden sm:inline-flex ml-5 font-medium rounded-lg text-sm px-5 py-2.5 text-center items-center">
                             <button id="toggleSidebarMobileSearch" type="button"
                                 class="lg:hidden text-gray-500p-2 rounded-lg">
                                 <span class="sr-only">Search</span>
@@ -68,11 +80,13 @@
                             </button>
 
                             <div class="flex items-center space-x-4 flex-row-reverse text-right gap-2">
-                                <img class="w-10 h-10 rounded-full" src="https://static.vecteezy.com/system/resources/previews/000/439/863/original/vector-users-icon.jpg"
+                                <img class="w-10 h-10 rounded-full"
+                                    src="https://static.vecteezy.com/system/resources/previews/000/439/863/original/vector-users-icon.jpg"
                                     alt="">
                                 <div class="font-medium text-black">
-                                    <div>Jese Leos</div>
-                                    <div class="text-sm text-gray-500 dark:text-gray-400">Joined in August 2014</div>
+                                    <div>{{ Auth::user()->name }}</div>
+                                    <div class="text-sm text-gray-500 dark:text-gray-400">Joined in
+                                        {{ Auth::user()->updated_at }}</div>
                                 </div>
                             </div>
 
@@ -90,7 +104,7 @@
                         <div class="flex-1 px-3 bg-white divide-y space-y-1">
                             <ul class="space-y-2 pb-2 pt-3">
                                 <li>
-                                    <a href="/dashboard"
+                                    <a href="/admin/dashboard"
                                         class="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group ">
                                         <svg class="w-6 h-6 text-gray-500 flex-shrink-0 group-hover:text-gray-900 transition duration-75"
                                             fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -102,7 +116,19 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="/dosen"
+                                    <a href="/admin/mahasiswa"
+                                        class="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group ">
+                                        <svg class="w-6 h-6 text-gray-500 flex-shrink-0 group-hover:text-gray-900 transition duration-75"
+                                            fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd"
+                                                d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                                                clip-rule="evenodd"></path>
+                                        </svg>
+                                        <span class="ml-3 flex-1 whitespace-nowrap">Mahasiswa</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/admin/dosen"
                                         class="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group ">
                                         <svg class="w-6 h-6 text-gray-500 flex-shrink-0 group-hover:text-gray-900 transition duration-75"
                                             fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -114,7 +140,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="/Mata-Kuliah"
+                                    <a href="/admin/Mata-Kuliah"
                                         class="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group ">
                                         <svg class="w-6 h-6 text-gray-500 flex-shrink-0 group-hover:text-gray-900 transition duration-75"
                                             fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">

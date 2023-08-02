@@ -2,8 +2,9 @@
 
 @section('content')
     <div class="mt-8">
-        <div class="mb-3">
-            <h3 class="text-xl font-bold text-gray-900 mb-2">Mata Kuliah</h3>
+        <div class="mb-3 flex justify-between">
+            <h3 class="text-xl font-bold text-gray-900 mb-2">Absensi Mata Kuliah</h3>
+            <button class="bg-cyan-500 shadow-cyan-500/50 text-white py-1 px-2 rounded-lg hover hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 shadow-md"><a href="/admin/form_matkul">Tambah Data</a></button>
         </div>
         <div class="overflow-hidden rounded-lg border border-gray-200 shadow-lg">
             <table class="w-full border-collapse bg-white text-left text-sm text-gray-500">

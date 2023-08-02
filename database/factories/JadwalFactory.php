@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\guru>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\jadwal>
  */
-class GuruFactory extends Factory
+class JadwalFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,9 +17,7 @@ class GuruFactory extends Factory
     public function definition(): array
     {
         return [
-            'guru_id' => fake()->unique()->numerify(),
-            'username' => fake()->name(),
-            'pelajaran' => fake()->unique()->name(),
+            //
         ];
     }
 }
