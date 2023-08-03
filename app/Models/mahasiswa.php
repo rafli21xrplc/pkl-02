@@ -11,11 +11,20 @@ class mahasiswa extends Model
 {
     use HasFactory;
 
+    // protected $casts = [
+    //     'email_verified_at' => 'datetime',
+    //     'password' => 'hashed',
+    // ];
+
     protected $fillable = [
-        'username',
-        'tanggal_lahir',
-        'alamat',
-        'jenis_kelamin',
+        'code',
+        'npm',
+        'name',
+        'birth_date',
+        'semester',
+        'image',
+        'email',
+        'phone',
     ];
 
     public function guru(): HasOne

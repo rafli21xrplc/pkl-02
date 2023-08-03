@@ -27,7 +27,6 @@
                 <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
                     <form class="space-y-4 md:space-y-6" method="POST" action="{{ route('validateSignUp') }}">
                         @csrf
-                        @method('POST')
                         <div>
                             <label for="Name"
                                 class="block mb-2 text-sm font-medium text-gray-900">Your Name</label>

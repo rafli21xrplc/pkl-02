@@ -8,7 +8,7 @@
         </div>
         <div class="overflow-hidden rounded-lg border border-gray-200 shadow-lg">
             <table class="w-full border-collapse bg-white text-left text-sm text-gray-500">
-                <thead class="bg-gray-50">
+                <thead class="bg-gray-100">
                     <tr class="text-center">
                         <th scope="col" class="px-6 py-4 font-medium text-gray-900">NID</th>
                         <th scope="col" class="px-6 py-4 font-medium text-gray-900 text-left">Nama Dosen</th>

@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('admins', function (Blueprint $table) {
             $table->id('id');
-            $table->foreignId('users_id')->references('id')->on('users');
-            $table->enum('role', ['user', 'admin'])->default('user');
+            $table->foreignUuid('users_id')->references('code')->on('users');
+            $table->enum('role', ['user', 'admin'])->default('admin');
             $table->timestamps();
         });
     }

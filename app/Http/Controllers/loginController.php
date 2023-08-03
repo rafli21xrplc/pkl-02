@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\admin;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class loginController extends Controller
 {
@@ -21,8 +23,8 @@ class loginController extends Controller
     {
 
         $validate = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
+            'email' => 'required|string|email|max:50',
+            'password' => 'required|string|min:6',
         ]);
 
         if (Auth::attempt($validate)) {
@@ -41,13 +43,25 @@ class loginController extends Controller
     protected function validationSignUp(Request $request)
     {
         $validate = $request->validate([
-            'email' => 'required',
-            'name' => 'required',
-            'password' => 'required',
+            'name' => 'required|string|max:50',
+            'email' => 'required|string|email|max:50|unique:users',
+            'password' => 'required|string|min:6',
         ]);
 
-        $validate['password'] = Hash::make($validate['password']);
-        User::create($validate);
+        $code = Str::uuid();
+
+        User::create([
+            'code' => $code,
+            'email' => $validate['email'],
+            'name' => $validate['name'],
+            'password' => Hash::make($validate['password']),
+        ]);
+
+        admin::create([
+            'users_id' => $code,
+            'role' => 'admin',
+        ]);
+                
         return redirect()->route('viewSignIn')->with('success', 'Registration successful. You can now log in.');
     }
 

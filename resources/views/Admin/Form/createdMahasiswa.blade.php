@@ -3,42 +3,42 @@
 @section('content')
     <section class="bg-white m-5 sm:p-5 shadow-md sm:rounded-lg overflow-hidden">
         <div class="py-8 px-4 mx-auto max-w-2xl lg:py-16">
-            <h2 class="mb-4 text-xl font-bold text-gray-900 ">Add a new wisata</h2>
-            <form action="/Homepage" method="POST" enctype="multipart/form-data">
+            <h2 class="mb-4 text-xl font-bold text-gray-900 ">Mahasiswa Baru</h2>
+            <form action="{{ route('newMahasiswa') }}" method="POST" enctype="multipart/form-data">
                 @csrf
+                <script>
+                    // Check if there are validation errors
+                    @if ($errors->any())
+                        // Concatenate all validation errors into a single string
+                        let errorMessage = "{!! implode('<br>', $errors->all()) !!}";
+                        // Display the error message in a pop-up/alert
+                        alert(errorMessage);
+                    @endif
+                </script>
                 <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
                     <div class="sm:col-span-2">
-                        <label for="name" class="block mb-2 text-sm font-medium text-gray-900 ">wisata
-                            Name</label>
+                        <label for="npm" class="block mb-2 text-sm font-medium text-gray-900 ">NPM</label>
+                        <input type="text" name="npm" id="npm"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
+                            placeholder="0029192" required="">
+                    </div>
+                    <div class="sm:col-span-2">
+                        <label for="name" class="block mb-2 text-sm font-medium text-gray-900 ">Nama</label>
                         <input type="text" name="name" id="name"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
-                            placeholder="Type wisata name" required="">
-                    </div>
-                    <div class="sm:col-span-2 hidden">
-                        <label for="slug"
-                            class="block mb-2 text-sm font-medium text-gray-900 ">slug</label>
-                        <input type="hidden" name="slug" id="slug"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
-                            placeholder="Type wisata slug" required="">
+                            placeholder="Mochamad Surya Rafliansyah" required="">
                     </div>
                     <div class="w-full">
-                        <label for="brand"
-                            class="block mb-2 text-sm font-medium text-gray-900 ">Writer</label>
-                        <input type="text" name="writer" id="Writer"
+                        <label for="tanggal" class="block mb-2 text-sm font-medium text-gray-900 ">Tanggal Lahir</label>
+                        <input type="date" name="tanggal" id="tanggal"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
-                            placeholder="John Cena" required="">
+                            required="">
                     </div>
                     <div>
-                        <label for="category"
-                            class="block mb-2 text-sm font-medium text-gray-900 ">Category</label>
-                        <select id="category" name="category"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 ">
-                            <option selected="">Select category</option>
-                            {{-- @foreach ($datasCategory as $item)
-                                <option value="{{ $item->category }}">{{ $item->category }}</option>
-                            @endforeach --}}
-                            {{-- <option value="PH">Phones</option> --}}
-                        </select>
+                        <label for="semester" class="block mb-2 text-sm font-medium text-gray-900 ">Semester</label>
+                        <input type="number" name="semester" id="semester"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
+                            required="" placeholder="2">
                     </div>
                     <div class="sm:col-span-2">
                         <label class="block mb-2 text-sm font-medium text-gray-900 " for="file_input">Upload
@@ -50,23 +50,21 @@
                             (MAX. 800x400px).</p>
                     </div>
                     <div class="sm:col-span-2">
-                        <label for="deskripsi"
-                            class="block mb-2 text-sm font-medium text-gray-900 ">deskripsi</label>
-                        <textarea id="deskripsi" rows="4" maxlength="200" name="deskripsi"
-                            class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 "
-                            placeholder="Your deskripsi here"></textarea>
+                        <label for="email" class="block mb-2 text-sm font-medium text-gray-900 ">email</label>
+                        <input type="email" name="email" id="email"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
+                            required="" placeholder="root@root.com">
                     </div>
                     <div class="sm:col-span-2">
-                        <label for="Body"
-                            class="block mb-2 text-sm font-medium text-gray-900 ">Body</label>
-                        <textarea id="Body" rows="8" name="body"
-                            class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 "
-                            placeholder="Your Body here"></textarea>
+                        <label for="tlp" class="block mb-2 text-sm font-medium text-gray-900 ">Telefon</label>
+                        <input type="text" name="tlp" id="tlp"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
+                            required="" placeholder="085*****">
                     </div>
                 </div>
                 <button type="submit"
-                    class="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
-                    Add wisata
+                    class="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center bg-primary-700 rounded-lg bg-cyan-500 shadow-cyan-500/50 text-white hover hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 shadow-md">
+                    Tambah Mahasiswa
                 </button>
             </form>
         </div>
