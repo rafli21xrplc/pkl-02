@@ -12,7 +12,7 @@ class dosen extends Model
     protected $fillable = [
         'code',
         'name',
-        'bidang mengajar',
+        'bidang_mengajar',
         'email',
         'phone',
     ];

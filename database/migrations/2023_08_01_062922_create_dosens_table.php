@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id('id');
             $table->uuid('code');
             $table->string('name');
-            $table->string('bidang mengajar');
+            $table->string('bidang_mengajar');
             $table->string('email')->unique();
             $table->string('phone')->nullable();
             $table->rememberToken();

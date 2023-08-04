@@ -34,42 +34,37 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
         return view('Admin.absensi', ['title' => 'Absensi Mahasiswa']);
     });
 
-    Route::get('/mahasiswa', function () {
-        return view('Admin.mahasiswa', ['title' => 'Mahasiswa']);
-    })->name('mahasiswa');
-
-    Route::get('/dosen', function () {
-        return view('Admin.dosen', ['title' => 'Dosen']);
-    });
-
-    Route::get('/Mata-Kuliah', function () {
-        return view('Admin.matkul', ['title' => 'Mata Kuliah']);
-    });
-
-    Route::middleware(['auth', 'admin'])->group(function () {
-        Route::controller(MahasiswaController::class)->group(function () {
-            Route::get('/form_mahasiswa', 'validationMahasiswa');
-        });
-
-        Route::controller(DosenController::class)->group(function () {
-            Route::get('/form_dosen', 'validationDosen');
-        });
-
-        Route::controller(MatkulController::class)->group(function () {
-            Route::get('/form_matkul', 'validationMatkul');
-        });
-    });
-
     Route::controller(MahasiswaController::class)->group(function () {
+        Route::get('/mahasiswa', 'viewListMahasiswa')->name('mahasiswa');
+        Route::get('/form_mahasiswa', 'validationMahasiswa');
+        Route::get('/form_editMahasiswa/{id}', 'form_editMahasiswa');
+        Route::get('/deleteMahasiswa/{id}', 'deletedDatas');    
+
+        // operations datas
         Route::post('/newMahasiswa', 'storeMahasiswa')->name('newMahasiswa');
+        Route::post('/updateMahasiswa/{id}', 'validationEditMahasiswa')->name('updatedMahasiswa');
     });
 
     Route::controller(DosenController::class)->group(function () {
+        Route::get('/dosen', 'viewListDosen');
+        Route::get('/form_dosen', 'validationDosen');
+        Route::get('/form_editDosen/{id}', 'form_editDosen');
+        Route::get('/delete/{id}', 'deletedDatas');
+        
+        // operations datas
         Route::post('/newDosen', 'storeDosen')->name('newDosen');
+        Route::post('/updateDosen/{id}', 'validationEditDosen')->name('updatedDosen');
     });
-
+    
     Route::controller(MatkulController::class)->group(function () {
+        Route::get('/Mata-Kuliah', 'viewListMatkul');
+        Route::get('/form_matkul', 'validationMatkul');
+        Route::get('/form_editMatkul/{id}', 'form_editMatkul');
+        Route::get('/delete/{id}', 'deletedDatas');
+        
+        // operations datas
         Route::post('/newMatkul', 'storeMatkul')->name('newMatkul');
+        Route::post('/updateMatkul/{id}', 'validationEditMatkul')->name('updatedMatkul');
     });
 });
 
