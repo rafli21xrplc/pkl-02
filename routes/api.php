@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\AbsenController;
 use App\Http\Controllers\GuruController;
+use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\MahasiswaController;
 use App\Models\mahasiswa;
 use Illuminate\Http\Request;
@@ -22,5 +24,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-Route::get('mahasiswa/{id}', [GuruController::class, 'showMahasiswa']);
-Route::get('guru/{id}', [GuruController::class, 'showGuru']);
+Route::get('matkul/{id}', [JadwalController::class, 'jadwalMatkuls']);
+Route::get('jadwalDosen/{id}', [JadwalController::class, 'jadwalDosen']);
+Route::get('absen/{id}', [AbsenController::class, 'absen']);
+Route::get('mahasiswa/{id}', [AbsenController::class, 'mahasiswa']);

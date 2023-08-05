@@ -3,6 +3,7 @@
 use App\Http\Controllers\AbsenController;
 use App\Http\Controllers\auth;
 use App\Http\Controllers\DosenController;
+use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\loginController;
 use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\MatkulController;
@@ -30,15 +31,30 @@ Route::controller(loginController::class)->group(function () {
 });
 
 Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('Admin.absensi', ['title' => 'Absensi Mahasiswa']);
+    // Route::get('/dashboard', function () {
+    //     return view('Admin.absensi', ['title' => 'Absensi Mahasiswa']);
+    // });
+
+    Route::controller(AbsenController::class)->group(function () {
+        Route::get('/dashboard', 'viewListAbsen');
+    });
+
+    Route::controller(JadwalController::class)->group(function () {
+        Route::get('/jadwal', 'viewListJadwal');
+        Route::get('/form_Jadwal', 'validationJadwal');
+        Route::get('/form_EditJadwal/{id}', 'form_EditJadwal');
+        Route::get('/deleteJadwal/{id}', 'deletedDatas');
+
+        // operations datas
+        Route::post('/newJadwal', 'storeJadwal')->name('newJadwal');
+        Route::post('/updatedJadwal/{id}', 'validationEditJadwal')->name('updatedJadwal');
     });
 
     Route::controller(MahasiswaController::class)->group(function () {
         Route::get('/mahasiswa', 'viewListMahasiswa')->name('mahasiswa');
         Route::get('/form_mahasiswa', 'validationMahasiswa');
         Route::get('/form_editMahasiswa/{id}', 'form_editMahasiswa');
-        Route::get('/deleteMahasiswa/{id}', 'deletedDatas');    
+        Route::get('/deleteMahasiswa/{id}', 'deletedDatas');
 
         // operations datas
         Route::post('/newMahasiswa', 'storeMahasiswa')->name('newMahasiswa');
@@ -50,18 +66,18 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
         Route::get('/form_dosen', 'validationDosen');
         Route::get('/form_editDosen/{id}', 'form_editDosen');
         Route::get('/delete/{id}', 'deletedDatas');
-        
+
         // operations datas
         Route::post('/newDosen', 'storeDosen')->name('newDosen');
         Route::post('/updateDosen/{id}', 'validationEditDosen')->name('updatedDosen');
     });
-    
+
     Route::controller(MatkulController::class)->group(function () {
         Route::get('/Mata-Kuliah', 'viewListMatkul');
         Route::get('/form_matkul', 'validationMatkul');
         Route::get('/form_editMatkul/{id}', 'form_editMatkul');
         Route::get('/delete/{id}', 'deletedDatas');
-        
+
         // operations datas
         Route::post('/newMatkul', 'storeMatkul')->name('newMatkul');
         Route::post('/updateMatkul/{id}', 'validationEditMatkul')->name('updatedMatkul');

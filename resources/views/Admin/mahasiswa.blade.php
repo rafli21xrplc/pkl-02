@@ -15,7 +15,7 @@
                         <th scope="col" class="px-6 py-4 font-medium text-gray-900">NPM</th>
                         <th scope="col" class="px-6 py-4 font-medium text-gray-900 text-left">Nama</th>
                         <th scope="col" class="px-6 py-4 font-medium text-gray-900">Semester</th>
-                        <th scope="col" class="px-6 py-4 font-medium text-gray-900">Image</th>
+                        <th scope="col" class="px-6 py-4 font-medium text-gray-900">Phone</th>
                         <th scope="col" class="px-6 py-4 font-medium text-gray-900">Action</th>
                     </tr>
                 </thead>
@@ -27,7 +27,7 @@
                                 <th class="flex gap-3 px-6 py-4 font-normal text-gray-900 text-left">
                                     <div class="relative h-10 w-10">
                                         <img class="h-full w-full rounded-full object-cover object-center"
-                                            src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                                            src="{{ asset('storage/' . $item->image) }}"
                                             alt="" />
                                         <span
                                             class="absolute right-0 bottom-0 h-2 w-2 rounded-full bg-green-400 ring ring-white"></span>
@@ -38,9 +38,7 @@
                                     </div>
                                 </th>
                                 <td class="px-6 py-4 text-center">{{ $item->semester }}</td>
-                                <td class="px-6 py-4">
-                                    <span>{{ $item->image }}</span>
-                                </td>
+                                <td class="px-6 py-4 text-center">{{ $item->phone }}</td>
                                 <td class="px-6 py-4">
                                     <div class="flex justify-center gap-4 ">
                                         <a x-data="{ tooltip: 'Edite' }" href="/admin/form_editMahasiswa/{{ $item->code }}">

@@ -3,7 +3,7 @@
 @section('content')
     <div class="mt-8">
         <div class="mb-3 flex justify-between">
-            <h3 class="text-xl font-bold text-gray-900 mb-2">Absensi Mahasiswa</h3>
+            <h3 class="text-xl font-bold text-gray-900 mb-2">Absensi</h3>
         </div>
         <div class="overflow-hidden rounded-lg border border-gray-200 shadow-lg">
             <table class="w-full border-collapse bg-white text-left text-sm text-gray-500">
@@ -13,19 +13,20 @@
                         <th scope="col" class="px-6 py-4 font-medium text-gray-900 text-left">Mahasiswa</th>
                         <th scope="col" class="px-6 py-4 font-medium text-gray-900">Kelas</th>
                         <th scope="col" class="px-6 py-4 font-medium text-gray-900">Status</th>
+                        <th scope="col" class="px-6 py-4 font-medium text-gray-900">Surat</th>
                         <th scope="col" class="px-6 py-4 font-medium text-gray-900">Action</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-100 border-t border-gray-100 text-center">
                     <tr class="hover:bg-gray-50">
                         <td class="px-6 py-4">-</td>
-                        <th class="flex gap-3 px-6 py-4 items-center font-normal text-gray-900 text-left">
-                            <div class="text-sm flex items-center">
-                                <div
-                                    class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                                    <input type="text" name="username" id="username"
-                                        class="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                                        placeholder="janesmith">
+                        <th class="px-6 py-4 text-center">
+                            <div class="sm:col-span-3">
+                                <div class="mt-2">
+                                    <select id="country" name="country" autocomplete="country-name"
+                                        class="text-center block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+                                        <option>Mochamad Surya Rafliansyah</option>
+                                    </select>
                                 </div>
                             </div>
                         </th>
@@ -34,9 +35,7 @@
                                 <div class="mt-2">
                                     <select id="country" name="country" autocomplete="country-name"
                                         class="text-center block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
-                                        <option>X</option>
-                                        <option>XI</option>
-                                        <option>XII</option>
+                                        <option>Ssandika Galih</option>
                                     </select>
                                 </div>
                             </div>
@@ -44,39 +43,44 @@
                         <td class="px-6 py-4 flex justify-center items-center">
                             <div class="mt-6 flex gap-2 justify-center">
                                 <div class="flex items-center gap-x-1">
-                                    <input id="push-everything" name="push-notifications" type="radio"
+                                    <input id="hadir" name="push-notifications" type="radio"
                                         class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600">
-                                    <label for="push-everything"
+                                    <label for="hadir"
                                         class="block text-sm font-medium leading-6 text-gray-900">Hadir</label>
                                 </div>
                                 <div class="flex items-center gap-x-1">
-                                    <input id="push-email" name="push-notifications" type="radio"
+                                    <input id="izin" name="push-notifications" type="radio"
                                         class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600">
-                                    <label for="push-email"
+                                    <label for="izin"
                                         class="block text-sm font-medium leading-6 text-gray-900">Izin</label>
                                 </div>
+                                <div class="flex items-center gap-x-1">
+                                    <input id="sakit" name="push-notifications" type="radio"
+                                        class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600">
+                                    <label for="sakit"
+                                        class="block text-sm font-medium leading-6 text-gray-900">Sakit</label>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4 text-center">
+                            <div class="sm:col-span-2">
+                                <input
+                                    class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none "
+                                    aria-describedby="file_input_help" id="file_input" type="file" name="image">
                             </div>
                         </td>
                         <td class="px-6 py-4">
                             <div class="flex justify-center gap-4 ">
                                 <a x-data="{ tooltip: 'Delete' }" href="#">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                        stroke-width="1.5" stroke="currentColor" class="h-6 w-6" x-tooltip="tooltip">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
-                                    </svg>
+                                    <i class="fa-solid fa-floppy-disk text-[30px]"></i>
                                 </a>
-                                <a x-data="{ tooltip: 'Edite' }" href="#">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                        stroke-width="1.5" stroke="currentColor" class="h-6 w-6" x-tooltip="tooltip">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
-                                    </svg>
+                                <a x-data="{ tooltip: 'Delete' }" href="#">
+                                    <i class="fa-solid fa-delete-left text-[30px]"></i>
                                 </a>
                             </div>
                         </td>
                     </tr>
-                    <tr class="hover:bg-gray-50">
+                    {{-- <tr class="hover:bg-gray-50">
                         <td class="px-6 py-4">1</td>
                         <th class="flex gap-3 px-6 py-4 font-normal text-gray-900 text-left">
                             <div class="relative h-10 w-10">
@@ -108,16 +112,9 @@
                                             d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
                                     </svg>
                                 </a>
-                                <a x-data="{ tooltip: 'Edite' }" href="#">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                        stroke-width="1.5" stroke="currentColor" class="h-6 w-6" x-tooltip="tooltip">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
-                                    </svg>
-                                </a>
                             </div>
                         </td>
-                    </tr>
+                    </tr> --}}
                 </tbody>
             </table>
         </div>

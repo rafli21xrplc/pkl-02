@@ -60,7 +60,7 @@ class MatkulController extends Controller
     protected function validationEditMatkul(Request $request, string $id)
     {
         $validate = Validator($request->all(), [
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:255|unique:matkuls,name',
         ]);
 
         if ($validate->fails()) {

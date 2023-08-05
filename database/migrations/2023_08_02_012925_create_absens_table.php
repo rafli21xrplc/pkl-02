@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('absens', function (Blueprint $table) {
             $table->id('id');
+            $table->string('code', 100)->unique();
             $table->foreignId('mahasiswa_id')->references('id')->on('mahasiswas');
             $table->foreignId('jadwal_id')->references('id')->on('jadwals');
             $table->date('date');

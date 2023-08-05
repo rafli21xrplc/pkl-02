@@ -43,9 +43,18 @@
                     <div class="sm:col-span-2">
                         <label class="block mb-2 text-sm font-medium text-gray-900 " for="file_input">Upload
                             file image</label>
+                        <div class="w-full px-3 mb-5">
+                            <div class="flex gap-10">
+                                <div class="flex justify-center">
+                                    <span class="font-medium text-center w-32 h-32"><img src="{{ asset('storage/' . $mahasiswas->image) }}"
+                                            alt="Image"></span>
+                                </div>
+                            </div>
+                        </div>
                         <input
                             class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none "
-                            aria-describedby="file_input_help" id="file_input" type="file" name="image" value="{{ $mahasiswas->image }}">
+                            aria-describedby="file_input_help" id="file_input" type="file" name="image"
+                            value="{{ $mahasiswas->image }}">
                         <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">SVG, PNG, JPG or GIF
                             (MAX. 800x400px).</p>
                     </div>

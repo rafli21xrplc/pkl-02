@@ -3,33 +3,37 @@
 @section('content')
     <div class="mt-8">
         <div class="mb-3 flex justify-between">
-            <h3 class="text-xl font-bold text-gray-900 mb-2">Mata Kuliah</h3>
-            <button
-                class="bg-cyan-500 shadow-cyan-500/50 text-white py-1 px-2 rounded-lg hover hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 shadow-md"><a
-                    href="/admin/form_matkul">Tambah Data</a></button>
+            <h3 class="text-xl font-bold text-gray-900 mb-2">Jadwal</h3>
+            <button type="button"
+                class="bg-cyan-500 shadow-cyan-500/50 text-white py-1 px-2 rounded-lg hover hover:bg-gradient-to-br focus:ring-4 focus:outline-none shadow-md focus:ring-cyan-300"><a
+                    href="/admin/form_Jadwal">Tambah Data</a></button>
         </div>
         <div class="overflow-hidden rounded-lg border border-gray-200 shadow-lg">
             <table class="w-full border-collapse bg-white text-left text-sm text-gray-500">
                 <thead class="bg-gray-100">
                     <tr class="text-center">
-                        <th scope="col" class="px-6 py-4 font-medium text-gray-900">NMK</th>
-                        <th scope="col" class="px-6 py-4 font-medium text-gray-900 text-left">Mata Kuliah</th>
+                        <th scope="col" class="px-6 py-4 font-medium text-gray-900">ID</th>
+                        <th scope="col" class="px-6 py-4 font-medium text-gray-900">Dosen</th>
+                        <th scope="col" class="px-6 py-4 font-medium text-gray-900">Mata Kuliah</th>
+                        <th scope="col" class="px-6 py-4 font-medium text-gray-900">Hari</th>
+                        <th scope="col" class="px-6 py-4 font-medium text-gray-900">Mulai Kelas</th>
+                        <th scope="col" class="px-6 py-4 font-medium text-gray-900">Akhir Kelas</th>
                         <th scope="col" class="px-6 py-4 font-medium text-gray-900">Action</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-100 border-t border-gray-100 text-center">
-                    @if (count($matkuls) > 0)
-                        @foreach ($matkuls as $item)
+                    @if (count($jadwal) > 0)
+                        @foreach ($jadwal as $item)
                             <tr class="hover:bg-gray-50">
-                                <td class="px-6 py-4">11222</td>
-                                <th class="flex gap-3 px-6 py-4 font-normal text-gray-900 text-left">
-                                    <div class="text-sm">
-                                        <div class="font-medium text-gray-700">{{ $item->name }}</div>
-                                    </div>
-                                </th>
+                                <td class="px-6 py-4 text-center">{{ $item->id }}</td>
+                                <td class="px-6 py-4 text-center">{{ $item->dosen[0]->name }}</td>
+                                <td class="px-6 py-4 text-center">{{ $item->matkul[0]->name }}</td>
+                                <td class="px-6 py-4 text-center">{{ $item->day_of_week }}</td>
+                                <td class="px-6 py-4 text-center">{{ $item->start_time }}</td>
+                                <td class="px-6 py-4 text-center">{{ $item->end_time }}</td>
                                 <td class="px-6 py-4">
                                     <div class="flex justify-center gap-4 ">
-                                        <a x-data="{ tooltip: 'Edite' }" href="/admin/form_editMatkul/{{ $item->code }}">
+                                        <a x-data="{ tooltip: 'Edite' }" href="/admin/form_EditJadwal/{{ $item->code }}">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                                 stroke-width="1.5" stroke="currentColor" class="h-6 w-6"
                                                 x-tooltip="tooltip">
@@ -37,7 +41,7 @@
                                                     d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
                                             </svg>
                                         </a>
-                                        <a x-data="{ tooltip: 'Delete' }" href="/admin/delete/{{ $item->code }}">
+                                        <a x-data="{ tooltip: 'Delete' }" href="/admin/deleteJadwal/{{ $item->code }}">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                                 stroke-width="1.5" stroke="currentColor" class="h-6 w-6"
                                                 x-tooltip="tooltip">
@@ -49,12 +53,6 @@
                                 </td>
                             </tr>
                         @endforeach
-                    @else
-                        <tr class="hover:bg-gray-50 flex justify-center items-center py-4 px-4">
-                            <td class="text-center w-full" colspan="2">
-                                <span>Not Found</span>
-                            </td>
-                        </tr>
                     @endif
                 </tbody>
             </table>

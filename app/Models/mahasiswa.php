@@ -27,9 +27,4 @@ class mahasiswa extends Model
         'phone',
     ];
 
-    public function guru(): HasOne
-    {
-        return $this->hasOne(guru::class, 'guru_id');
-    }
-
 }
