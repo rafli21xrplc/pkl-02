@@ -16,6 +16,9 @@
                                     <option value="{{ $data->id }}">{{ $data->name }}</option>
                                 @endforeach
                             </select>
+                            @error('dosen_id')
+                                <div class="text-red-500">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
                     <div class="sm:col-span-2">
@@ -31,6 +34,9 @@
                                 <option value="Saturday">Saturday</option>
                                 <option value="Sunday">Sunday</option>
                             </select>
+                            @error('day_of_week')
+                                <div class="text-red-500">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
                     <div class="w-full">
@@ -38,12 +44,18 @@
                         <input type="time" name="start_time" id="start"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
                             required="">
+                        @error('start_time')
+                            <div class="text-red-500">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="w-full">
                         <label for="end" class="block mb-2 text-sm font-medium text-gray-900 ">Akhir Kelas</label>
                         <input type="time" name="end_time" id="end"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
                             required="">
+                        @error('end_time')
+                            <div class="text-red-500">{{ $message }}</div>
+                        @enderror
                     </div>
                 </div>
                 <button type="submit"

@@ -30,14 +30,24 @@ Route::controller(loginController::class)->group(function () {
     Route::post('/signUp', 'validationSignUp')->name('validateSignUp');
 });
 
+Route::middleware(['auth', 'user'])->group(function () {
+    Route::controller(AbsenController::class)->group(function () {
+        Route::get('/dashboard', 'viewListAbsen');
+        Route::get('/deleted/{id}', 'deleted');
+    
+        // operations datas
+        // Route::post('/createAbsen', 'storeAbsen')->name('storeAbsen');
+        Route::post('/storeAbsen', 'storeAbsen')->name('postAbsen');
+        // Route::post('/storeAbsen', function () {
+        //     dd($_POST);
+        // })->name('postAbsen');
+    });
+});
+
 Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     // Route::get('/dashboard', function () {
     //     return view('Admin.absensi', ['title' => 'Absensi Mahasiswa']);
     // });
-
-    Route::controller(AbsenController::class)->group(function () {
-        Route::get('/dashboard', 'viewListAbsen');
-    });
 
     Route::controller(JadwalController::class)->group(function () {
         Route::get('/jadwal', 'viewListJadwal');

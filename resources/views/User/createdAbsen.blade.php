@@ -12,27 +12,18 @@
                         <input type="text" name="name" id="name"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
                             placeholder="Eko Kurniawan Khanedi" required="">
-                            @error('name')
-                            <div class="text-red-500">{{ $message }}</div>
-                        @enderror
                     </div>
                     <div class="sm:col-span-2">
                         <label for="email" class="block mb-2 text-sm font-medium text-gray-900 ">email</label>
                         <input type="email" name="email" id="email"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
                             required="" placeholder="root@root.com">
-                            @error('email')
-                            <div class="text-red-500">{{ $message }}</div>
-                        @enderror
                     </div>
                     <div class="w-full">
                         <label for="tlp" class="block mb-2 text-sm font-medium text-gray-900 ">Telefon</label>
                         <input type="number" name="tlp" id="tlp"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
                             required="" placeholder="085*****">
-                            @error('phone')
-                            <div class="text-red-500">{{ $message }}</div>
-                        @enderror
                     </div>
                     <div>
                         <label for="mengajar" class="block mb-2 text-sm font-medium text-gray-900 ">Bidang Mengajar</label>
@@ -42,9 +33,6 @@
                                 <option value="{{ $data->name }}">{{ $data->name }}</option>
                             @endforeach
                         </select>
-                        @error('bidang_mengajar')
-                        <div class="text-red-500">{{ $message }}</div>
-                    @enderror
                     </div>
                 </div>
                 <button type="submit"

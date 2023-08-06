@@ -9,13 +9,22 @@ class absen extends Model
 {
     use HasFactory;
 
-    public function absen()
+    protected $fillable = [
+        'code',
+        'mahasiswa_id',
+        'jadwal_id',
+        'date',
+        'image',
+        'status'
+    ];
+
+    public function jadwal()
     {
-        return $this->hasOne(jadwal::class, 'id', 'jadwal_id');
+        return $this->hasMany(jadwal::class, 'id', 'jadwal_id');
     }
 
     public function mahasiswa()
     {
-        return $this->hasOne(absen::class, 'id', 'mahasiswa_id');
+        return $this->hasMany(mahasiswa::class, 'id', 'mahasiswa_id');
     }
 }

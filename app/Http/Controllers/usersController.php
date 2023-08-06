@@ -12,40 +12,8 @@ use Illuminate\Support\Facades\Redirect;
 
 class usersController extends Controller
 {
-    protected function viewSignIn(Request $request): Response
+    public function absensi(Request $request)
     {
-        return response()->view('signIn', ['title' => 'SignIn']);
-    }
-    protected function validationSignIn(Request $request)
-    {
-        $validate = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
-        ]);
-
-        if (Auth::attempt($validate)) {
-            $request->session()->regenerate();
-            return redirect()->intended('/dashboard');
-        }
-
-        return back()->with("error", "SignIn failed");
-    }
-
-    protected function viewSignUp(Request $request): Response
-    {
-        return response()->view('signUp', ['title' => 'SignUp']);
-    }
-
-    protected function validationSignUp(Request $request)
-    {
-        $validate = $request->validate([
-            'email' => 'required',
-            'name' => 'required',
-            'password' => 'required',
-        ]);
-
-        $validate['password'] = Hash::make($validate['password']);
-        User::create($validate);
-        return redirect()->route('viewSignIn')->with('success', 'Registration successful. You can now log in.');
+        dd(auth()->user());
     }
 }

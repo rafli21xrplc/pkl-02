@@ -17,7 +17,8 @@ return new class extends Migration
             $table->foreignId('mahasiswa_id')->references('id')->on('mahasiswas');
             $table->foreignId('jadwal_id')->references('id')->on('jadwals');
             $table->date('date');
-            $table->enum('status', ['absen', 'izin', 'alpha']);
+            $table->enum('status', ['Hadir', 'Izin', 'Alpha']);
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

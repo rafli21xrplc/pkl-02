@@ -28,4 +28,14 @@ class jadwal extends Model
     {
         return $this->hasMany(dosen::class, 'id', 'dosen_id');
     }
+
+    //  public function dosen()
+    // {
+    //     return $this->belongsTo(Dosen::class, 'dosen_id');
+    // }
+
+    // public function matkul()
+    // {
+    //     return $this->belongsTo(MataKuliah::class, 'mata_kuliah_id');
+    // }
 }
