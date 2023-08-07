@@ -10,6 +10,24 @@
         integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>{{ $title }}</title>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script>
+        function showConfirmation(code) {
+            swal({
+                title: "Are you sure?",
+                text: "Once deleted, you will not be able to recover this data!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            }).then((willDelete) => {
+                if (willDelete) {
+                    window.location.href = "/deleted/" + code;
+                } else {
+                }
+            });
+        }
+    </script>
+
 </head>
 
 <body>
@@ -33,7 +51,8 @@
                                     clip-rule="evenodd"></path>
                             </svg>
                         </button>
-                        <a href="/admin/dashboard" class="text-xl font-bold flex items-center lg:ml-2.5">
+                        <a href=" {{ auth()->user()->role === 'admin' ? '/admin/dashboard' : '/dashboard' }}"
+                            class="text-xl font-bold flex items-center lg:ml-2.5">
                             <img src="https://demo.themesberg.com/windster/images/logo.svg" class="h-6 mr-2"
                                 alt="Windster Logo">
                             <span class="self-center whitespace-nowrap">Dashboard</span>
@@ -114,6 +133,60 @@
                                                     clip-rule="evenodd"></path>
                                             </svg>
                                             <span class="ml-3 flex-1 whitespace-nowrap">Absensi</span>
+                                        </a>
+                                    </li>
+                                    <li class="border-2 border-slate-300"></li>
+                                    <li>
+                                        <a href="/jadwal"
+                                            class="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group ">
+                                            <svg class="w-6 h-6 text-gray-500 flex-shrink-0 group-hover:text-gray-900 transition duration-75"
+                                                fill="currentColor" viewBox="0 0 20 20"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd"
+                                                    d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                                                    clip-rule="evenodd"></path>
+                                            </svg>
+                                            <span class="ml-3 flex-1 whitespace-nowrap">Jadwal</span>
+                                        </a>
+                                    </li>
+                                    <li class="border-2 border-slate-300"></li>
+                                    <li>
+                                        <a href="/mahasiswa"
+                                            class="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group ">
+                                            <svg class="w-6 h-6 text-gray-500 flex-shrink-0 group-hover:text-gray-900 transition duration-75"
+                                                fill="currentColor" viewBox="0 0 20 20"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd"
+                                                    d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                                                    clip-rule="evenodd"></path>
+                                            </svg>
+                                            <span class="ml-3 flex-1 whitespace-nowrap">Mahasiswa</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/dosen"
+                                            class="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group ">
+                                            <svg class="w-6 h-6 text-gray-500 flex-shrink-0 group-hover:text-gray-900 transition duration-75"
+                                                fill="currentColor" viewBox="0 0 20 20"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd"
+                                                    d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                                                    clip-rule="evenodd"></path>
+                                            </svg>
+                                            <span class="ml-3 flex-1 whitespace-nowrap">Dosen</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/matkul"
+                                            class="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group ">
+                                            <svg class="w-6 h-6 text-gray-500 flex-shrink-0 group-hover:text-gray-900 transition duration-75"
+                                                fill="currentColor" viewBox="0 0 20 20"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd"
+                                                    d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                                                    clip-rule="evenodd"></path>
+                                            </svg>
+                                            <span class="ml-3 flex-1 whitespace-nowrap">Mata Kuliah</span>
                                         </a>
                                     </li>
                                 @else

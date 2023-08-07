@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use RealRashid\SweetAlert\Facades\Alert;
 use Throwable;
 
 class AbsenController extends Controller
@@ -40,25 +41,40 @@ class AbsenController extends Controller
 
     protected function storeAbsen(Request $request)
     {
-        $validate = Validator($request->all(), [
-            'code' => 'required|string|max:100',
-            'mahasiswa_id' => 'required|exists:mahasiswas,id',
-            'jadwal_id' => 'required|exists:jadwals,id',
-            'date' => 'required|date',
-            'status' => 'required|in:Hadir,Alpha,Izin',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
+        // $validate = Validator($request->all(), [
+        //     'code' => 'string|max:100',
+        //     'mahasiswa_id' => '',
+        //     'jadwal_id' => 'exists:jadwals,id',
+        //     'date' => 'date',
+        //     'status' => 'in:Hadir,Alpha,Izin',
+        //     'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        // ]);
 
-        if ($validate->fails()) {
-            return redirect()->back()
-                ->withErrors($validate)
-                ->withInput();
-        }
+        // if ($validate->fails()) {
+        //     return redirect()->back()
+        //         ->withErrors($validate)
+        //         ->withInput();
+        // }
+        $code = Str::uuid();
 
-        if ($request->file('image')) {
-            $image = $request->file('image')->store('images', 'public');
-            $code = Str::uuid();
-            try {
+        $datas = absen::create(
+            [
+                'code' => $code,
+                'mahasiswa_id' => $request->input('mahasiswa_id'),
+                'name' => $request->input('name'),
+                'jadwal_id' => $request->input('jadwal_id'),
+                'date' => $request->input('date'),
+                'status' => $request->input('status'),
+                'image' => $request->input('mahasiswa_id'),
+            ]
+        );
+
+        // dd($datas);
+        try {
+            if ($request->file('image')) {
+                $image = $request->file('image')->store('images', 'public');
+            } else {
+                $code = Str::uuid();
                 absen::create(
                     [
                         'code' => $code,
@@ -66,14 +82,16 @@ class AbsenController extends Controller
                         'jadwal_id' => $request->input('jadwal_id'),
                         'date' => $request->input('date'),
                         'status' => $request->input('status'),
-                        'image' => $image,
+                        'image' => $request->file('image'),
                     ]
                 );
-            } catch (Throwable $e) {
-                return response()->redirectTo('/dashboard')->with('failed', "failed");
             }
-            return response()->redirectTo('/dashboard')->with('success', 'User created successfully.');
+        } catch (Throwable $e) {
+            return response()->redirectTo('/dashboard')->with('failed', "failed");
         }
+
+        Alert::success('success', 'Data Success Di Create!!');
+        return response()->redirectTo('/dashboard')->with('success', 'User created successfully.');
     }
 
     protected function deleted(string $id)
@@ -85,7 +103,8 @@ class AbsenController extends Controller
         } catch (\Exception $e) {
             return response()->redirectTo('/dashboard')->with('error', 'An error occurred.');
         }
-
+        
+        Alert::success('success', 'Data Success Di Delete!!');
         return response()->redirectTo('/dashboard')->with('message', 'Data success deleted');
     }
 }

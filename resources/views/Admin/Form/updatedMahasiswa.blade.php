@@ -17,7 +17,7 @@
                         <label for="npm" class="block mb-2 text-sm font-medium text-gray-900 ">NPM</label>
                         <input type="text" name="npm" id="npm"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
-                            placeholder="0029192" required="" value="{{ $mahasiswas->npm }}">
+                            placeholder="0029192" required="" value="{{ $mahasiswas->npm }}" min="0">
                         @error('npm')
                             <div class="text-red-500">{{ $message }}</div>
                         @enderror
@@ -44,7 +44,7 @@
                         <label for="semester" class="block mb-2 text-sm font-medium text-gray-900 ">Semester</label>
                         <input type="number" name="semester" id="semester"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
-                            required="" placeholder="2" value="{{ $mahasiswas->semester }}">
+                            required="" placeholder="2" value="{{ $mahasiswas->semester }}" min="0">
                         @error('semester')
                             <div class="text-red-500">{{ $message }}</div>
                         @enderror
@@ -83,7 +83,7 @@
                         <label for="tlp" class="block mb-2 text-sm font-medium text-gray-900 ">Telefon</label>
                         <input type="text" name="tlp" id="tlp"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
-                            required="" placeholder="085*****" value="{{ $mahasiswas->phone }}">
+                            required="" placeholder="085*****" value="{{ $mahasiswas->phone }}" min="0">
                         @error('phone')
                             <div class="text-red-500">{{ $message }}</div>
                         @enderror
@@ -96,4 +96,6 @@
             </form>
         </div>
     </section>
+    @include('sweetalert::alert')
+
 @endsection

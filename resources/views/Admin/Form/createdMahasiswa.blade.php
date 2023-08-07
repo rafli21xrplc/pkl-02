@@ -17,7 +17,7 @@
                         <label for="npm" class="block mb-2 text-sm font-medium text-gray-900 ">NPM</label>
                         <input type="text" name="npm" id="npm"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
-                            placeholder="0029192" required="">
+                            placeholder="0029192" required="" min="0" value="{{ old('npm') }}">
                         @error('npm')
                             <div class="text-red-500">{{ $message }}</div>
                         @enderror
@@ -26,7 +26,7 @@
                         <label for="name" class="block mb-2 text-sm font-medium text-gray-900 ">Nama</label>
                         <input type="text" name="name" id="name"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
-                            placeholder="Mochamad Surya Rafliansyah" required="">
+                            placeholder="Mochamad Surya Rafliansyah" required="" value="{{ old('name') }}">
                         @error('name')
                             <div class="text-red-500">{{ $message }}</div>
                         @enderror
@@ -35,7 +35,7 @@
                         <label for="tanggal" class="block mb-2 text-sm font-medium text-gray-900 ">Tanggal Lahir</label>
                         <input type="date" name="tanggal" id="tanggal"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
-                            required="">
+                            required="" value="{{ old('tanggal') }}">
                         @error('birth_date')
                             <div class="text-red-500">{{ $message }}</div>
                         @enderror
@@ -44,7 +44,7 @@
                         <label for="semester" class="block mb-2 text-sm font-medium text-gray-900 ">Semester</label>
                         <input type="number" name="semester" id="semester"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
-                            required="" placeholder="2">
+                            required="" placeholder="2" min="0" value="{{ old('semester') }}">
                         @error('semester')
                             <div class="text-red-500">{{ $message }}</div>
                         @enderror
@@ -54,7 +54,7 @@
                             file image</label>
                         <input
                             class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none "
-                            aria-describedby="file_input_help" id="file_input" type="file" name="image">
+                            aria-describedby="file_input_help" id="file_input" type="file" name="image" value="{{ old('image') }}">
                         <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">SVG, PNG, JPG or GIF
                             (MAX. 800x400px).</p>
                         @error('image')
@@ -65,7 +65,7 @@
                         <label for="email" class="block mb-2 text-sm font-medium text-gray-900 ">email</label>
                         <input type="email" name="email" id="email"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
-                            required="" placeholder="root@root.com">
+                            required="" placeholder="root@root.com" value="{{ old('email') }}">
                         @error('email')
                             <div class="text-red-500">{{ $message }}</div>
                         @enderror
@@ -74,7 +74,7 @@
                         <label for="tlp" class="block mb-2 text-sm font-medium text-gray-900 ">Telefon</label>
                         <input type="text" name="tlp" id="tlp"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
-                            required="" placeholder="085*****">
+                            required="" placeholder="085*****" min="0" value="{{ old('tlp') }}">
                         @error('phone')
                             <div class="text-red-500">{{ $message }}</div>
                         @enderror
@@ -87,4 +87,6 @@
             </form>
         </div>
     </section>
+    @include('sweetalert::alert')
+
 @endsection

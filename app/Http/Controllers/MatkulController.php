@@ -2,15 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\dosen;
+use App\Models\jadwal;
 use App\Models\matkul;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Throwable;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class MatkulController extends Controller
 {
+
+    protected function viewMataKuliah(Request $request)
+    {
+        $title = 'Mata Kuliah';
+        $matkuls = matkul::all();
+        return response()->view('User.matkul', compact('title', 'matkuls'));
+    }
+
     protected function viewListMatkul(Request $request)
     {
         $title = 'Mata Kuliah';
@@ -54,6 +66,7 @@ class MatkulController extends Controller
         } catch (Throwable $e) {
             return response()->redirectTo('/admin/form_matkul')->with('failed', "failed");
         }
+        Alert::success('success', 'Data Success Di Buat!!');
         return response()->redirectTo('/admin/Mata-Kuliah')->with('success', 'User created successfully.');
     }
 
@@ -76,24 +89,28 @@ class MatkulController extends Controller
 
         try {
             DB::table('matkuls')
-            ->where('code', $id)
-            ->update($value);
+                ->where('code', $id)
+                ->update($value);
         } catch (Throwable $e) {
             return response()->redirectTo('/admin/form_matkul')->with('failed', "failed");
         }
+        Alert::success('success', 'Data Success Di Update!!');
         return response()->redirectTo('/admin/Mata-Kuliah')->with('success', 'User created successfully.');
     }
 
     protected function deletedDatas(Request $request, string $id)
     {
+
+        // $datasRelations = dosen::find('code', $id);
+        // dd($datasRelations);
+
         try {
             DB::table('matkuls')->where('code', $id)->delete();
-        } catch (ModelNotFoundException $e) {
-            return response()->redirectTo('/admin/Mata-Kuliah')->with('error', 'Record not found.');
-        } catch (\Exception $e) {
-            return response()->redirectTo('/admin/Mata-Kuliah')->with('error', 'An error occurred.');
+        } catch (QueryException $e) {
+            return response()->redirectTo('/admin/Mata-Kuliah')->with('error', 'Data Masih Digunakan.');
         }
 
+        Alert::success('success', 'Data Success Di Delete!!');
         return response()->redirectTo('/admin/Mata-Kuliah')->with('message', 'Data success deleted');
     }
 }

@@ -9,10 +9,18 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use RealRashid\SweetAlert\Facades\Alert;
 use Throwable;
 
 class MahasiswaController extends Controller
 {
+
+    protected function viewMahasiswa(Request $request)
+    {
+        $title = 'Mahasiswa';
+        $mahasiswas = mahasiswa::all();
+        return response()->view('User.mahasiswa', compact('title', 'mahasiswas'));
+    }
 
     protected function viewListMahasiswa(Request $request)
     {
@@ -36,13 +44,13 @@ class MahasiswaController extends Controller
     protected function storeMahasiswa(Request $request)
     {
         $validate = Validator::make($request->all(), [
-            'npm' => 'required|string|max:10|unique:mahasiswas,npm',
+            'npm' => 'required|string|max:11|min:10|unique:mahasiswas,npm',
             'name' => 'required|string|max:255',
             'tanggal' => 'required|date|before:today',
             'semester' => 'required|integer|min:1|max:10',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'email' => 'required|string|email|max:255|unique:mahasiswas,email',
-            'tlp' =>  'required|string|max:20|unique:mahasiswas,phone',
+            'tlp' =>  'required|string|max:13|min:12|unique:mahasiswas,phone',
         ]);
 
         if ($validate->fails()) {
@@ -71,6 +79,8 @@ class MahasiswaController extends Controller
                 $error = $e->getMessage();
                 return response()->redirectTo('/admin/form_mahasiswa')->with('failed', "$error");
             }
+
+        Alert::success('success', 'Data Success Di Create!!');
             return response()->redirectTo('/admin/mahasiswa')->with('success', 'User created successfully.');
         }
     }
@@ -78,25 +88,25 @@ class MahasiswaController extends Controller
     protected function validationEditMahasiswa(Request $request, string $id)
     {
         $validate = Validator::make($request->all(), [
-            'npm' => 'required|string|max:10',
+            'npm' => 'required|string|max:11|min:10',
             'name' => 'required|string|max:255',
             'tanggal' => 'required|date|before:today',
             'semester' => 'required|integer|min:1|max:10',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'email' => 'required|string|email|max:255',
-            'tlp' =>  'required|string|max:20',
+            'tlp' =>  'required|string|max:13|min:12',
         ]);
 
-        if ($validate->fails()) {
-            return redirect()->back()
-                ->withErrors($validate)
-                ->withInput();
-        }
 
         $mahasiswa = mahasiswa::where('code', $id)->first();
         $existingPhotoPath = $mahasiswa->image;
 
         if ($request->hasFile('image') && $request->file('image')) {
+            if ($validate->fails()) {
+                return redirect()->back()
+                    ->withErrors($validate)
+                    ->withInput();
+            }
 
             $newImage = $request->file('image')->store('images', 'public');
 
@@ -133,6 +143,8 @@ class MahasiswaController extends Controller
         } catch (Throwable $e) {
             return response()->redirectTo('/admin/form_mahasiswa')->with('failed', "failed");
         }
+
+        Alert::success('success', 'Data Success Di Update!!');
         return response()->redirectTo('/admin/mahasiswa')->with('success', 'User created successfully.');
     }
 
@@ -149,6 +161,7 @@ class MahasiswaController extends Controller
             return response()->redirectTo('/mahasiswa')->with('error', 'An error occurred.');
         }
 
+        Alert::success('success', 'Data Success Di Delete!!');
         return response()->redirectTo('/admin/mahasiswa')->with('message', 'Data success deleted');
     }
 }

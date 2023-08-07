@@ -53,6 +53,7 @@ class Kernel extends HttpKernel
      * @var array<string, class-string|string>
      */
     protected $middlewareAliases = [
+        // RealRashid\SweetAlert\SweetAlertServiceProvider::class,
         'user' => \App\Http\Middleware\UserMiddleware::class,
         'admin' => \App\Http\Middleware\AdminMiddleware::class,
         'auth' => \App\Http\Middleware\Authenticate::class,

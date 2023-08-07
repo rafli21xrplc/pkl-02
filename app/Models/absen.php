@@ -11,7 +11,7 @@ class absen extends Model
 
     protected $fillable = [
         'code',
-        'mahasiswa_id',
+        'name',
         'jadwal_id',
         'date',
         'image',

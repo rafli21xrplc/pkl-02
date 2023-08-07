@@ -27,16 +27,18 @@ class loginController extends Controller
             'password' => 'required|string|min:6',
         ]);
 
+        
         if (Auth::attempt($validate)) {
+            // dd(auth()->user()->role);
             if (auth()->user()->role == "admin") {
                 $request->session()->regenerate();
-                return redirect()->intended('admin/jadwal');
+                return redirect()->intended('/admin/jadwal');
             } else if (auth()->user()->role == "user")
                 $request->session()->regenerate();
             return redirect()->intended('/dashboard');
         }
 
-        return back()->with("error", "SignIn failed");
+        return back()->with("error", "Gagal Login");
     }
 
     protected function viewSignUp(Request $request): Response
@@ -66,7 +68,7 @@ class loginController extends Controller
             'role' => 'admin',
         ]);
 
-        return redirect()->route('viewSignIn')->with('success', 'Registration successful. You can now log in.');
+        return redirect()->route('viewSignIn')->with('success', 'Registasi Berhasil Silakan Login.');
     }
 
     protected function signOut(Request $request)

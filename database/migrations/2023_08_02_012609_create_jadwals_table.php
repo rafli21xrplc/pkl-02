@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('jadwals', function (Blueprint $table) {
             $table->id('id');
             $table->string('code', 100)->unique();
-            $table->foreignId('dosen_id')->references('id')->on('dosens');
-            $table->foreignId('mata_kuliah_id')->references('id')->on('matkuls');
+            $table->foreignId('dosen_id')->references('id')->on('dosens')->onDelete('restrict');
+            $table->foreignId('mata_kuliah_id')->references('id')->on('matkuls')->onDelete('restrict');
             $table->string('day_of_week');
             $table->time('start_time');
             $table->time('end_time');

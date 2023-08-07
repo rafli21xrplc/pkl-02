@@ -7,3 +7,10 @@
 * {
     font-family: "Poppins", sans-serif;
 }
+
+.not-found-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}

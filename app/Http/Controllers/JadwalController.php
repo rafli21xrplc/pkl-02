@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Throwable;
 use Illuminate\Support\Str;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class JadwalController extends Controller
 {
@@ -30,6 +31,13 @@ class JadwalController extends Controller
         return response()->json([
             'data' => $dosen
         ]);
+    }
+
+    protected function viewjadwal()
+    {
+        $title = "Jadwal";
+        $jadwal = jadwal::with('matkul', 'dosen')->get();
+        return response()->view('User.jadwal', compact('title', 'jadwal'));
     }
 
     protected function viewListJadwal()
@@ -92,6 +100,8 @@ class JadwalController extends Controller
         } catch (Throwable $e) {
             return response()->redirectTo('/admin/form_Jadwal')->with('failed', 'failed');
         }
+
+        Alert::success('success', 'Data Success Di Create!!');
         return response()->redirectTo('/admin/jadwal')->with('success', 'User created successfully.');
     }
 
@@ -132,6 +142,8 @@ class JadwalController extends Controller
         } catch (Throwable $e) {
             return response()->redirectTo('/admin/form_Jadwal')->with('failed', 'failed');
         }
+
+        Alert::success('success', 'Data Success Di Update!!');
         return response()->redirectTo('/admin/jadwal')->with('success', 'User created successfully.');
     }
 
@@ -145,6 +157,7 @@ class JadwalController extends Controller
             return response()->redirectTo('/jadwal')->with('error', 'An error occurred.');
         }
 
+        Alert::success('success', 'Data Success Di Delete!!');
         return response()->redirectTo('/admin/jadwal')->with('message', 'Data success deleted');
     }
 }

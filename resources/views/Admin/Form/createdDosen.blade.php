@@ -29,8 +29,8 @@
                         <label for="tlp" class="block mb-2 text-sm font-medium text-gray-900 ">Telefon</label>
                         <input type="number" name="tlp" id="tlp"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
-                            required="" placeholder="085*****">
-                            @error('phone')
+                            required="" placeholder="085*****" min="0">
+                            @error('tlp')
                             <div class="text-red-500">{{ $message }}</div>
                         @enderror
                     </div>
@@ -54,4 +54,6 @@
             </form>
         </div>
     </section>
+    @include('sweetalert::alert')
+
 @endsection

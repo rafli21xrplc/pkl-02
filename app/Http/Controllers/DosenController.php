@@ -8,10 +8,18 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use RealRashid\SweetAlert\Facades\Alert;
 use Throwable;
 
 class DosenController extends Controller
 {
+    protected function viewDosen(Request $request)
+    {
+        $title = 'Dosen';
+        $dosens = dosen::all();
+        return response()->view('User.dosen', compact('title', 'dosens'));
+    }
+
     protected function viewListDosen(Request $request)
     {
         $title = 'Dosen';
@@ -39,8 +47,10 @@ class DosenController extends Controller
         $validate = Validator($request->all(), [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:dosens,email',
-            'tlp' =>  'required|string|max:20|unique:dosens,phone',
+            'tlp' =>  'required|string|min:12|max:20|unique:dosens,phone',
             'mengajar' =>  'required|string'
+        ], [
+            "tlp.min" => "No Harus 12!!"
         ]);
 
         if ($validate->fails()) {
@@ -64,16 +74,16 @@ class DosenController extends Controller
         } catch (Throwable $e) {
             return response()->redirectTo('/admin/form_dosen')->with('failed', "failed");
         }
+        Alert::success('success', 'Data Success Di Buat!!');
         return response()->redirectTo('/admin/dosen')->with('success', 'User created successfully.');
     }
-
 
     protected function validationEditDosen(Request $request, string $id)
     {
         $validate = Validator($request->all(), [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255',
-            'tlp' =>  'required|string|max:20',
+            'tlp' =>  'required|string|max:20|min:12',
             'mengajar' =>  'required|string'
         ]);
 
@@ -99,6 +109,7 @@ class DosenController extends Controller
         } catch (Throwable $e) {
             return response()->redirectTo('/admin/newDosen')->with('failed', "failed");
         }
+        Alert::success('success', 'Data Success Di Update!!');
         return response()->redirectTo('/admin/dosen')->with('success', 'User created successfully.');
     }
 
@@ -106,12 +117,11 @@ class DosenController extends Controller
     {
         try {
             DB::table('dosens')->where('code', $id)->delete();
-        } catch (ModelNotFoundException $e) {
-            return response()->redirectTo('/admin/dosen')->with('error', 'Record not found.');
         } catch (\Exception $e) {
-            return response()->redirectTo('/admin/dosen')->with('error', 'An error occurred.');
+            return response()->redirectTo('/admin/dosen')->with('error', 'Data Masih Digunakan.');
         }
 
+        Alert::success('success', 'Data Success Di Delete!!');
         return response()->redirectTo('/admin/dosen')->with('message', 'Data success deleted');
     }
 }

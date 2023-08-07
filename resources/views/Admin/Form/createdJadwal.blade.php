@@ -65,4 +65,6 @@
             </form>
         </div>
     </section>
+    @include('sweetalert::alert')
+
 @endsection

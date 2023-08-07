@@ -53,9 +53,17 @@
                                 </td>
                             </tr>
                         @endforeach
+                    @else
+                        <tr class="hover:bg-gray-50">
+                            <td class="text-center w-full py-4" colspan="5">
+                                <span class="not-found-text">Not Found</span>
+                            </td>
+                        </tr>
                     @endif
                 </tbody>
             </table>
         </div>
     </div>
+    @include('sweetalert::alert')
+
 @endsection

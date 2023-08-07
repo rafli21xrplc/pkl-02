@@ -36,11 +36,23 @@ Route::middleware(['auth', 'user'])->group(function () {
         Route::get('/deleted/{id}', 'deleted');
     
         // operations datas
-        // Route::post('/createAbsen', 'storeAbsen')->name('storeAbsen');
         Route::post('/storeAbsen', 'storeAbsen')->name('postAbsen');
-        // Route::post('/storeAbsen', function () {
-        //     dd($_POST);
-        // })->name('postAbsen');
+    });
+
+    Route::controller(MahasiswaController::class)->group(function () {
+        Route::get('/mahasiswa', 'viewMahasiswa');
+    });
+
+    Route::controller(DosenController::class)->group(function () {
+        Route::get('/dosen', 'viewDosen');
+    });
+
+    Route::controller(MatkulController::class)->group(function () {
+        Route::get('/matkul', 'viewMataKuliah');
+    });
+
+    Route::controller(JadwalController::class)->group(function () {
+        Route::get('/jadwal', 'viewjadwal');
     });
 });
 
@@ -75,7 +87,7 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
         Route::get('/dosen', 'viewListDosen');
         Route::get('/form_dosen', 'validationDosen');
         Route::get('/form_editDosen/{id}', 'form_editDosen');
-        Route::get('/delete/{id}', 'deletedDatas');
+        Route::get('/deleteDosen/{id}', 'deletedDatas');
 
         // operations datas
         Route::post('/newDosen', 'storeDosen')->name('newDosen');
@@ -86,7 +98,7 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
         Route::get('/Mata-Kuliah', 'viewListMatkul');
         Route::get('/form_matkul', 'validationMatkul');
         Route::get('/form_editMatkul/{id}', 'form_editMatkul');
-        Route::get('/delete/{id}', 'deletedDatas');
+        Route::get('/deleteMatkul/{id}', 'deletedDatas');
 
         // operations datas
         Route::post('/newMatkul', 'storeMatkul')->name('newMatkul');

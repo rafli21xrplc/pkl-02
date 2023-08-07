@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('absens', function (Blueprint $table) {
             $table->id('id');
             $table->string('code', 100)->unique();
-            $table->foreignId('mahasiswa_id')->references('id')->on('mahasiswas');
-            $table->foreignId('jadwal_id')->references('id')->on('jadwals');
+            $table->string('name', 100);
+            // $table->foreignId('mahasiswa_id')->references('id')->on('mahasiswas')->onDelete('restrict');
+            $table->foreignId('jadwal_id')->references('id')->on('jadwals')->onDelete('restrict');
             $table->date('date');
             $table->enum('status', ['Hadir', 'Izin', 'Alpha']);
             $table->string('image')->nullable();
